@@ -1,4 +1,4 @@
-```html
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -9,7 +9,6 @@
   <title>DenialCurb Solutions | Healthcare Revenue Cycle Services</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js"></script>
-  <script src="/_sdk/fbe2ebfd64647c54.data_sdk.js" integrity="sha512-vkTX6CfvpHc3WbjK+tFJCaDuw4ERA4aEV/e5/7+MMJPMTF4RJYCI6CAwJBT/gtDW+dba4uLSsPUgDjVDHWtgUQ=="></script>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Fraunces:opsz,wght@9..144,700;9..144,800&amp;display=swap" rel="stylesheet">
   <style>
     :root {
@@ -31,9 +30,6 @@
     .nav-link:hover, .nav-link:focus-visible, .nav-link.active { color: var(--teal); }
     .nav-link.active::after { width: 100%; }
     .dot-rule { border-top: 2px dotted currentColor; }
-    .hero-orbit { animation: drift 8s ease-in-out infinite; }
-    .hero-orbit-reverse { animation: drift 8s ease-in-out infinite reverse; }
-    @keyframes drift { 50% { transform: translateY(-12px) rotate(5deg); } }
     .reveal { opacity: 0; transform: translateY(22px); transition: opacity .65s ease, transform .65s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
     .service-card { transition: transform .25s ease, box-shadow .25s ease, background .25s ease; }
@@ -263,8 +259,11 @@
        </div>
       </div>
       <div data-template-id="contact-form-panel" class="canva-panel reveal rounded-[2rem] border border-[#b8c8c5] p-6 shadow-sm sm:p-9" style="background: rgb(255, 255, 255);">
-       <form id="consultation-form" action="https://formspree.io/f/xvgoaqjy" method="POST" novalidate="">
-        <!-- Formspree hidden Subject Field -->
+       
+       <!-- FORMSPREE ACTION URL PLACED HERE -->
+       <form id="consultation-form" action="https://formspree.io/f/mppzyned" method="POST" novalidate="">
+        
+        <!-- Formspree Subject Settings -->
         <input type="hidden" name="_subject" value="New Consultation Request - DenialCurb Solutions">
         
         <div class="grid gap-5 sm:grid-cols-2">
@@ -390,7 +389,7 @@
       const statsSection = document.getElementById("statistics");
       if(statsSection) statObserver.observe(statsSection);
 
-      // Form Handling (Cleaned up exclusively for Formspree)
+      // Form Handling setup purely for Formspree endpoint
       const form = document.getElementById("consultation-form");
       const submitButton = document.getElementById("submit-button");
       const status = document.getElementById("form-status");
@@ -453,11 +452,10 @@
             let errorData = null;
             try { errorData = await response.json(); } catch(e) {}
             
-            // This catches the Formspree "This form is not set up yet" error natively
             if (errorData && Object.hasOwn(errorData, 'errors')) {
               status.textContent = errorData.errors.map(err => err.message).join(", ");
             } else {
-              status.textContent = "Oops! There was a problem submitting your form. Please try again.";
+              status.textContent = "Oops! Form not found or submission issue. Double check your Formspree ID.";
             }
             status.className = "text-sm font-semibold text-[#a43825]";
           }
@@ -473,4 +471,3 @@
   </script>
 </body>
 </html>
-```
